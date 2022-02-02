@@ -1,8 +1,10 @@
-# Security Patterns Service Installation
+# Security Patterns Service 
+
+## Security Patterns Service Installation
 
 In this wiki page we describe how the Security Patterns Service can be installed.
 
-## Installation using Anaconda
+### Installation using Anaconda
 
 In this section, we provide instructions on how the user can build the python Flask server of the Security Patterns Service from scratch, using the Anaconda virtual environment. The Security Patterns Service is developed to run on Windows systems with python 3.6.* installed. We suggest installing python via the Anaconda distribution as it provides an easy way to create a virtual environment and install dependencies. The configuration steps needed, are described below:
 
@@ -31,7 +33,7 @@ conda install -c anaconda flask flask-cors pymongo waitress dnspython
 - **Step 5**: To start the server, use the command promt inside the active environment and execute the following command:
 
 
-# Security Patterns Service Usage
+## Security Patterns Service Usage
 
 In this wiki page we describe how the Security Patterns Service can be used. 
 Given a problem statement and a set of forces acting on the system, design patterns instruct its stakeholders on how to build this system. Patterns in the information technology environment provide information system architects with a technique for creating reusable solutions to design challenges. In this document, we describe the main functionality of the Security Patterns web service and how it can be put in practice in order to provide the user with useful information regarding Security Requirements (e.g. Authentication, Authorization, etc.) Security Patterns (e.g. Authenticator, Cryptographic), Security Control Technologies (e.g. OAuth2.0, Two Factor Authentication, etc.) and Security Libraries in Java or Python that utilize the aforementioned technologies. As part of the SmartCLIDE platform, the current service is an attempt to assist developers in selecting the most suitable security patterns and implementing them in their software. Detailed description and indicative examples of the usage of the Security Patterns web service are provided, to facilitate better understanding.
