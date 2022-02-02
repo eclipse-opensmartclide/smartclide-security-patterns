@@ -6,7 +6,31 @@ In this wiki page we describe how the Security Patterns Service can be installed
 
 In this section, we provide instructions on how the user can build the python Flask server of the Security Patterns Service from scratch, using the Anaconda virtual environment. The Security Patterns Service is developed to run on Windows systems with python 3.6.* installed. We suggest installing python via the Anaconda distribution as it provides an easy way to create a virtual environment and install dependencies. The configuration steps needed, are described below:
 
-- **Step 1**: Download the latest [Anaconda distribution](https://www.anaconda.com/products/individual) and follow the installation steps described in the [Anaconda documentation][https://docs.anaconda.com/anaconda/install/windows/].
+- **Step 1**: Download the latest [Anaconda distribution](https://www.anaconda.com/products/individual) and follow the installation steps described in the [Anaconda documentation](https://docs.anaconda.com/anaconda/install/windows/).
+
+- **Step2**: Open Anaconda cmd. Running Anaconda cmd activates the base environment. We need to create a specific environment to run the Security Patterns Service. Create a new python 3.6.4 environment by running the following command:
+
+```
+conda create --name security_patterns python=3.6.4
+```
+
+This command will result in the creation of a conda environment named security_patterns. In order to activate the new environment, execute the following command:
+
+```
+conda activate security_patterns
+```
+
+- **Step 3**: Now that the environment is activated, install the required libraries:
+
+```
+conda install -c anaconda flask flask-cors pymongo waitress dnspython
+```
+
+- **Step 4**: Clone the latest Security Patterns version that can be found in the present Github repository of the Security Patterns Service and navigate to the root directory.
+
+- **Step 5**: To start the server, use the command promt inside the active environment and execute the following command:
+
+```
 
 
 # Security Patterns Service Usage
