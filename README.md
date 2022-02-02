@@ -30,8 +30,21 @@ conda install -c anaconda flask flask-cors pymongo waitress dnspython
 
 - **Step 4**: Clone the latest Security Patterns version that can be found in the present Github repository of the Security Patterns Service and navigate to the root directory.
 
-- **Step 5**: To start the server, use the command promt inside the active environment and execute the following command:
+- **Step 5**: To start the Security Patterns using the built-in Flask server, use the command promt inside the active Conda environment and execute the following command:
+ 
+```
+python main.py 0.0.0.0 5000 builtin --debug
+```
 
+This command will start the built-in Flask server locally (0.0.0.0) on port 5000.
+
+Or you can start the Security Patterns using the Waitress server. Use the command promt inside the active Conda environment and execute the following command:
+
+```
+python main.py 0.0.0.0 5000 waitress
+```
+
+This command will start the Waitress server locally (0.0.0.0) on port 5000. Note that the Waitress mode is higly recommended in real production environments, since it supports scaling and multiple-request handling features.
 
 ## Security Patterns Service Usage
 
