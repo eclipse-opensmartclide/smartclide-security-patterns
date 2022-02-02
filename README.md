@@ -2,6 +2,11 @@
 
 In this wiki page we describe how the Security Patterns Service can be installed.
 
+## Installation using Anaconda
+
+In this section, we provide instructions on how the user can build the python Flask server of the Security Patterns Service from scratch, using the Anaconda virtual environment. The Security Patterns Service is developed to run on Windows systems with python 3.6.* installed. We suggest installing python via the Anaconda distribution as it provides an easy way to create a virtual environment and install dependencies. The configuration steps needed, are described below:
+
+- **Step 1**: Download the latest [Anaconda distribution][https://www.anaconda.com/products/individual] and follow the installation steps described in the [Anaconda documentation][https://docs.anaconda.com/anaconda/install/windows/].
 
 
 # Security Patterns Service Usage
