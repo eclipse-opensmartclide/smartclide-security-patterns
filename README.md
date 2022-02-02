@@ -30,8 +30,6 @@ conda install -c anaconda flask flask-cors pymongo waitress dnspython
 
 - **Step 5**: To start the server, use the command promt inside the active environment and execute the following command:
 
-```
-
 
 # Security Patterns Service Usage
 
