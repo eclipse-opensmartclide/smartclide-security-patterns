@@ -1,9 +1,11 @@
 #Security Patterns Service Installation
+
 In this wiki page we describe how the Security Patterns Service can be installed.
 
 
 
 #Security Patterns Service Usage
+
 In this wiki page we describe how the Security Patterns Service can be used. 
 Given a problem statement and a set of forces acting on the system, design patterns instruct its stakeholders on how to build this system. Patterns in the information technology environment provide information system architects with a technique for creating reusable solutions to design challenges. In this document, we describe the main functionality of the Security Patterns web service and how it can be put in practice in order to provide the user with useful information regarding Security Requirements (e.g. Authentication, Authorization, etc.) Security Patterns (e.g. Authenticator, Cryptographic), Security Control Technologies (e.g. OAuth2.0, Two Factor Authentication, etc.) and Security Libraries in Java or Python that utilize the aforementioned technologies. As part of the SmartCLIDE platform, the current service is an attempt to assist developers in selecting the most suitable security patterns and implementing them in their software. Detailed description and indicative examples of the usage of the Security Patterns web service are provided, to facilitate better understanding.
 The Security Patterns web service provides the user with valuable information on the security domain as mentioned earlier. All information regarding this service is stored in a mongo database and the information of interest will be extracted and presented to the user when requested. This is achieved through a dedicated API exposed by the RESTful web server, which is, in fact, a simple HTTP GET request. The inputs that need to be provided as parameters to this request are listed below:
