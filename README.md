@@ -10,7 +10,7 @@ In this section, we provide instructions on how the user can build the python Fl
 
 - **Step 1**: Download the latest [Anaconda distribution](https://www.anaconda.com/products/individual) and follow the installation steps described in the [Anaconda documentation](https://docs.anaconda.com/anaconda/install/windows/).
 
-- **Step2**: Open Anaconda cmd. Running Anaconda cmd activates the base environment. We need to create a specific environment to run the Security Patterns Service. Create a new python 3.6.4 environment by running the following command:
+- **Step 2**: Open Anaconda cmd. Running Anaconda cmd activates the base environment. We need to create a specific environment to run the Security Patterns Service. Create a new python 3.6.4 environment by running the following command:
 
 ```
 conda create --name security_patterns python=3.6.4
