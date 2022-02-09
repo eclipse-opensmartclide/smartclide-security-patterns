@@ -1,12 +1,9 @@
-import argparse
-import sys
-import os
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from waitress import serve
-from test import all_together,find_patterns,find_technologies3,find_libraries
-#from bson import ObjectId
-#from bson.objectid import ObjectId
+from test import all_together
+
 import json
 from bson import ObjectId
 #from utils import import_to_database, objectid_to_string
@@ -20,7 +17,7 @@ CORS(app)
 # database_results ()
 #===============================================================================
 @app.route('/DataBase', methods=['POST','GET'])
-def database_results(passowrd=None,requirement=None,pattern=None, technology=None, language=None):
+def database_results(requirement=None,pattern=None, technology=None, language=None):
     """
     API Call to database
     Arguments:
@@ -33,7 +30,6 @@ def database_results(passowrd=None,requirement=None,pattern=None, technology=Non
     """
 
     # Parse URL-encoded parameters
-    password=request.args.get('password', type=str)  # Required: if key doesn't exist, returns None
     requirement = request.args.get('requirement', type=str)  # Required: if key doesn't exist, returns None
     pattern = request.args.get('pattern', default=None,type=str) # Optional: if key doesn't exist, returns None
     technology = request.args.get('technology', default=None, type=str)  # Optional: if key doesn't exist, returns None
@@ -42,7 +38,7 @@ def database_results(passowrd=None,requirement=None,pattern=None, technology=Non
     if requirement is None:
         return unprocessable_entity()
     else:
-        results=all_together(password, requirement,pattern,technology,language)
+        results=all_together(requirement,pattern,technology,language)
         results=JSONEncoder().encode(results)
         #print(results)
         # Compose and jsonify respond

@@ -1,18 +1,11 @@
-#import pymongo
-#from pymongo import MongoClient
+import pymongo
 from bson.objectid import ObjectId
-#f=open('.gitignore','r')
-#password = f.read()
+f=open('password.cfg','r')
+password = f.read()
+client = pymongo.MongoClient("mongodb+srv://maria:"+password+"@cluster0.gecb7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.test
 
-def url_(password):
-    import pymongo
-    client = pymongo.MongoClient("mongodb+srv://maria:"+password+"@cluster0.gecb7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client.test
-    return db
-
-
-
-def find_patterns(db, requirement,pattern):
+def find_patterns(requirement,pattern):
     for x in db["SecurityRequirements"].find({"requirement name": requirement}):
         id_=x["_id"]
         patterns=x["related_security_patterns"]
@@ -38,7 +31,7 @@ def find_patterns(db, requirement,pattern):
     return(json,patterns_list)
 
 
-def find_technologies3(db, boolean, pattern, technology):
+def find_technologies3(boolean, pattern, technology):
     if boolean is False:
         all_lists = []
         for thing in pattern:
@@ -104,7 +97,7 @@ def find_technologies3(db, boolean, pattern, technology):
     return (all_lists)
 
 
-def find_libraries(db, technology, language):
+def find_libraries(technology, language):
     for x in db["SecurityControlTechnology"].find({"technology name": technology}):
         id_ = x["_id"]
         libraries = x["related_security_libraries"]
@@ -129,17 +122,13 @@ def find_libraries(db, technology, language):
 
     return (libraries_list)
 
-def all_together(password, requirement, pattern, technology, language):
-    import pymongo
-    db = url_(password)
-    #client = pymongo.MongoClient(URL)
-    #db = client.test
-    json, l = find_patterns(db, requirement, pattern)
+def all_together(requirement, pattern, technology, language):
+    json, l = find_patterns(requirement, pattern)
     # print(l)
     if pattern is None:
-        json2 = find_technologies3(db, False, l, technology)
+        json2 = find_technologies3(False, l, technology)
     else:
-        json2 = find_technologies3(db, True, pattern, technology)
+        json2 = find_technologies3(True, pattern, technology)
 
     # json["patterns"]=json2
     # print(json2)
@@ -155,7 +144,7 @@ def all_together(password, requirement, pattern, technology, language):
                             if item5 == 'technology name':
                                 local = item4[item5]
                                 # print(local)
-                                json3 = find_libraries(db, local, language)
+                                json3 = find_libraries(local, language)
                                 # print(json3)
                                 item4["related_security_libraries"] = json3
         json["patterns"] = json2
@@ -169,7 +158,7 @@ def all_together(password, requirement, pattern, technology, language):
                         if item2 == "technology name":
                             local = item[item2]
                         if item2 == "related_security_libraries":
-                            json3 = find_libraries(db, local, language)
+                            json3 = find_libraries(local, language)
                             item[item2] = json3
 
 
@@ -190,7 +179,7 @@ def all_together(password, requirement, pattern, technology, language):
                         for item3 in item2:
                             # print(item3)
                             if item3 == "related_security_libraries":
-                                json3 = find_libraries(db, technology, language)
+                                json3 = find_libraries(technology, language)
                                 item2[item3] = json3
                                 # print(my_list)
         for key in dict1:
@@ -216,7 +205,7 @@ def all_together(password, requirement, pattern, technology, language):
                     for item2 in item:
                         if item2 == "related_security_libraries":
                             # print(" ")
-                            json3 = find_libraries(db, technology, language)
+                            json3 = find_libraries(technology, language)
                             item[item2] = json3
                             # json["patterns"]=json2
     return (json)
@@ -224,5 +213,4 @@ def all_together(password, requirement, pattern, technology, language):
 #pattern="Authenticator"
 #technology="OAuth2.0"
 #language=None
-#password="1234"
-#print(all_together(password,requirement,pattern,technology,language))
+#print(all_together(requirement,pattern,technology,language))
