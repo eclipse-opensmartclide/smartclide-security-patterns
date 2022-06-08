@@ -25,7 +25,7 @@ conda activate security_patterns
 - **Step 3**: Now that the environment is activated, install the required libraries:
 
 ```
-conda install -c anaconda flask flask-cors pymongo waitress dnspython
+conda install -c anaconda flask flask-cors pymongo waitress dnspython colorama
 ```
 
 - **Step 4**: Clone the latest Security Patterns version that can be found in the present Github repository of the Security Patterns Service and navigate to the root directory.
