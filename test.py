@@ -1,13 +1,3 @@
-#*******************************************************************************
-# Copyright (C) 2021-2022 CERTH
-# 
-# This program and the accompanying materials are made
-# available under the terms of the Eclipse Public License 2.0
-# which is available at https://www.eclipse.org/legal/epl-2.0/
-# 
-# SPDX-License-Identifier: EPL-2.0
-#*******************************************************************************
-
 import pymongo
 from bson.objectid import ObjectId
 f=open('password.cfg','r')
@@ -107,7 +97,7 @@ def find_technologies3(boolean, pattern, technology):
     return (all_lists)
 
 
-def find_libraries(technology, language):
+def find_libraries(requirement, technology, language):
     for x in db["SecurityControlTechnology"].find({"technology name": technology}):
         id_ = x["_id"]
         libraries = x["related_security_libraries"]
@@ -125,12 +115,30 @@ def find_libraries(technology, language):
             # print(cur)
             cur_list.append(cur)
 
+
     libraries_list = []
+    #new part taking under consideration the requirement in the library
     for item in cur_list:
+        # print(item)
         for doc in item:
-            libraries_list.append(doc)
+            # print(doc)
+            for item2 in doc:
+                # print(item2)
+                if item2 == "requirements":
+                    item3 = doc[item2]
+                    if requirement in item3:
+                        libraries_list.append(doc)
+    #for item in cur_list:
+    #    for doc in item:
+    #        libraries_list.append(doc)
 
     return (libraries_list)
+
+def delete_multiple_element(list_object, indices):
+    indices = sorted(indices, reverse=True)
+    for idx in indices:
+        if idx < len(list_object):
+            list_object.pop(idx)
 
 def all_together(requirement, pattern, technology, language):
     json, l = find_patterns(requirement, pattern)
@@ -154,7 +162,7 @@ def all_together(requirement, pattern, technology, language):
                             if item5 == 'technology name':
                                 local = item4[item5]
                                 # print(local)
-                                json3 = find_libraries(local, language)
+                                json3 = find_libraries(requirement, local, language)
                                 # print(json3)
                                 item4["related_security_libraries"] = json3
         json["patterns"] = json2
@@ -168,7 +176,7 @@ def all_together(requirement, pattern, technology, language):
                         if item2 == "technology name":
                             local = item[item2]
                         if item2 == "related_security_libraries":
-                            json3 = find_libraries(local, language)
+                            json3 = find_libraries(requirement, local, language)
                             item[item2] = json3
 
 
@@ -189,7 +197,7 @@ def all_together(requirement, pattern, technology, language):
                         for item3 in item2:
                             # print(item3)
                             if item3 == "related_security_libraries":
-                                json3 = find_libraries(technology, language)
+                                json3 = find_libraries(requirement, technology, language)
                                 item2[item3] = json3
                                 # print(my_list)
         for key in dict1:
@@ -215,12 +223,31 @@ def all_together(requirement, pattern, technology, language):
                     for item2 in item:
                         if item2 == "related_security_libraries":
                             # print(" ")
-                            json3 = find_libraries(technology, language)
+                            json3 = find_libraries(requirement, technology, language)
                             item[item2] = json3
                             # json["patterns"]=json2
+
+    to_remove = []
+    for item in json:
+        # print(item)
+        if item == "patterns":
+            item2 = json[item]
+            for item3 in item2:
+                if item3 == "technologies":
+                    item4 = item2[item3]
+                    for i in range(0, len(item4)):
+                        item5 = item4[i]
+                        for item6 in item5:
+                            if item6 == "related_security_libraries":
+                                item7 = item5[item6]
+                                if len(item7) == 0:
+                                    to_remove.append(i)
+
+    for item in json:
+        if item == "patterns":
+            item2 = json[item]
+            for item3 in item2:
+                if item3 == "technologies":
+                    item4 = item2[item3]
+                    item4 = delete_multiple_element(item4, to_remove)
     return (json)
-#requirement="Authentication"
-#pattern="Authenticator"
-#technology="OAuth2.0"
-#language=None
-#print(all_together(requirement,pattern,technology,language))
