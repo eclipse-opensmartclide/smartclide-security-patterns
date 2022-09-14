@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  # Triggers the workflow on push request events but only for the main branch
+  push:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish Docker Image
+        run: |
+          # login to GitHub Container Registry
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${GITHUB_ACTOR} --password-stdin
+          # build image
+          docker build . --tag ghcr.io/eclipse-researchlabs/smartclide/security-patterns:$(date +'%Y-%m-%d')
+          # push image
+          docker push ghcr.io/eclipse-researchlabs/smartclide/security-patterns:$(date +'%Y-%m-%d')
