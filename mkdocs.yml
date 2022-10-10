@@ -1,5 +1,5 @@
 site_name: SmartCLIDE Security Patterns Service Component
-repo_url: https://github.com/eclipse-researchlabs/smartclide-security-patterns
+repo_url: https://github.com/eclipse-opensmartclide/smartclide-security-patterns
 
 nav:
   - Service Discovery: 'index.md'
