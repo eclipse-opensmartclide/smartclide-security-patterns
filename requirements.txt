@@ -1,7 +1,7 @@
 aniso8601==8.0.0
 click==7.1.2
 colorama==0.4.4
-dnspython==1.16.0
+dnspython==2.2.1
 flask==1.1.2
 flask-cors==3.0.10
 flask-restful==0.3.8
